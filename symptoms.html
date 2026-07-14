@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Check your symptoms — Nirog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a href="index.html" class="logo">Nirog<span class="logo-dot">.</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#trust">Read this first</a>
+      </nav>
+      <a href="#" class="btn btn-ghost nav-cta">Log in</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intake">
+      <div class="wrap intake-grid">
+
+        <!-- LEFT: input -->
+        <div class="intake-form">
+          <p class="eyebrow">Step 1 of 1</p>
+          <h1 class="intake-title">What's going on?</h1>
+          <p class="intake-sub">Type it in your own words, or tap what applies below. The more you add, the sharper the read.</p>
+
+          <label for="freeText" class="field-label">Describe how you feel</label>
+          <textarea id="freeText" class="free-text" rows="4" placeholder="e.g. bad headache since yesterday, feel dizzy when I stand up, a bit nauseous too"></textarea>
+
+          <p class="field-label">Or tap what applies</p>
+          <div class="symptom-grid" id="symptomGrid"><!-- chips injected by script.js --></div>
+
+          <div class="intake-actions">
+            <button id="analyzeBtn" class="btn btn-primary" type="button">Analyze symptoms</button>
+            <button id="clearBtn" class="btn btn-text" type="button">Clear all</button>
+          </div>
+          <p class="intake-disclaimer">This is a screening aid, not a diagnosis — always confirm with a doctor.</p>
+        </div>
+
+        <!-- RIGHT: results -->
+        <div class="intake-results">
+          <div class="panel-card" id="resultsCard">
+            <p class="panel-label">Your results</p>
+            <div id="resultsEmpty" class="results-empty">
+              <p>Nothing to show yet. Add a few symptoms on the left and hit <strong>Analyze symptoms</strong>.</p>
+            </div>
+            <div id="resultsFilled" class="results-filled" hidden>
+              <ul class="result-list" id="resultList"></ul>
+              <p class="panel-note" id="specialistNote"></p>
+              <a href="#" class="btn btn-ghost results-cta">Find nearby hospitals →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>Nirog</span>
+      <span class="footer-fine">A student project — not a certified medical device.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="symptoms.js"></script>
+</body>
+</html>
