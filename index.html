@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nirog — know what to do next</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a href="#top" class="logo">Nirog<span class="logo-dot">.</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#specialists">Specialists</a>
+        <a href="#trust">Read this first</a>
+      </nav>
+      <a href="#" class="btn btn-ghost nav-cta">Log in</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Symptom check &amp; specialist match</p>
+          <h1>Tell us what you feel.<br>We'll tell you who to see.</h1>
+          <p class="hero-sub">Describe your symptoms in plain words. Nirog reads them, estimates what's likely going on, and points you to the right kind of doctor — and a hospital nearby that treats it.</p>
+          <div class="hero-actions">
+            <a href="#" class="btn btn-primary">Check your symptoms</a>
+            <a href="#how" class="btn btn-text">See how it works ↓</a>
+          </div>
+        </div>
+
+        <div class="hero-panel" aria-hidden="false">
+          <div class="panel-card">
+            <p class="panel-label">Symptoms mentioned</p>
+            <div class="chip-row" id="chipRow">
+              <span class="chip chip-on">headache</span>
+              <span class="chip chip-on">dizziness</span>
+              <span class="chip chip-on">nausea</span>
+              <span class="chip">fever</span>
+              <span class="chip">rash</span>
+              <span class="chip">fatigue</span>
+            </div>
+            <div class="pulse-divider">
+              <svg viewBox="0 0 400 60" preserveAspectRatio="none" class="pulse-svg">
+                <path id="pulsePath" d="M0,30 L120,30 L145,8 L165,52 L185,30 L400,30" />
+              </svg>
+            </div>
+            <p class="panel-label">Most likely, in order</p>
+            <ul class="result-list">
+              <li><span class="rank">01</span><span class="cond">Migraine</span><span class="conf">68%</span></li>
+              <li><span class="rank">02</span><span class="cond">Vestibular imbalance</span><span class="conf">21%</span></li>
+              <li><span class="rank">03</span><span class="cond">Dehydration</span><span class="conf">11%</span></li>
+            </ul>
+            <p class="panel-note">Suggested specialist — <strong>Neurologist</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+      <div class="wrap">
+        <h2 class="section-title">Three steps, in order</h2>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num">01</span>
+            <h3>Describe what you feel</h3>
+            <p>Type it naturally, or pick from a checklist — whichever's faster for you.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">02</span>
+            <h3>Get a probability read</h3>
+            <p>Not one rigid answer — the top few conditions it could be, ranked by likelihood.</p>
+          </li>
+          <li class="step">
+            <span class="step-num">03</span>
+            <h3>Meet the right specialist</h3>
+            <p>See which kind of doctor treats it, and nearby hospitals that see these cases.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- SPECIALISTS -->
+    <section class="specialists" id="specialists">
+      <div class="wrap specialists-grid">
+        <div class="specialists-copy">
+          <h2 class="section-title">Matched to the right domain</h2>
+          <p>Every predicted condition is mapped to the specialty that treats it, so you're not left wondering which doctor to book.</p>
+        </div>
+        <div class="specialty-tags">
+          <span class="tag">Cardiologist</span>
+          <span class="tag">Endocrinologist</span>
+          <span class="tag">Neurologist</span>
+          <span class="tag">Dermatologist</span>
+          <span class="tag">Gastroenterologist</span>
+          <span class="tag">Pulmonologist</span>
+          <span class="tag">General Physician</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST / DISCLAIMER -->
+    <section class="trust" id="trust">
+      <div class="wrap trust-row">
+        <p class="trust-mark">!</p>
+        <p class="trust-text">Nirog is a screening aid, not a diagnosis. It narrows down what to ask a doctor about — it doesn't replace one. If something feels urgent, see a doctor directly.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>Nirog</span>
+      <span class="footer-fine">A student project — not a certified medical device.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
