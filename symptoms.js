@@ -26,24 +26,24 @@ const SYMPTOMS = [
 // used for genuine red-flag combinations (sudden one-sided weakness,
 // slurred speech, seizures, loss of consciousness).
 const CONDITIONS = [
-  { name: "Common cold", tier: "General Physician", specialist: "General Physician", symptoms: ["cough", "sore throat", "runny nose", "congestion", "fatigue"] },
-  { name: "Flu / viral fever", tier: "General Physician", specialist: "General Physician", symptoms: ["fever", "chills", "fatigue", "muscle pain", "headache"] },
-  { name: "Migraine", tier: "General Physician", specialist: "General Physician", symptoms: ["headache", "nausea", "blurred vision", "dizziness"] },
-  { name: "Tension headache", tier: "General Physician", specialist: "General Physician", symptoms: ["headache", "muscle pain", "stiffness"] },
-  { name: "Sinusitis", tier: "General Physician", specialist: "General Physician", symptoms: ["sinus pressure", "congestion", "headache", "sore throat"] },
-  { name: "Gastroenteritis", tier: "General Physician", specialist: "General Physician", symptoms: ["abdominal pain", "diarrhoea", "nausea", "vomiting", "fever"] },
-  { name: "Food poisoning", tier: "General Physician", specialist: "General Physician", symptoms: ["vomiting", "diarrhoea", "abdominal pain", "nausea"] },
-  { name: "Acid reflux / GERD", tier: "General Physician", specialist: "General Physician", symptoms: ["heartburn", "bloating", "chest pain"] },
-  { name: "Type 2 diabetes (early signs)", tier: "General Physician", specialist: "General Physician", symptoms: ["excessive thirst", "frequent urination", "fatigue", "blurred vision", "weight loss"] },
-  { name: "Asthma / airway irritation", tier: "General Physician", specialist: "General Physician", symptoms: ["cough", "shortness of breath", "wheezing", "chest pain"] },
-  { name: "Contact dermatitis", tier: "General Physician", specialist: "General Physician", symptoms: ["rash", "itching", "swelling"] },
-  { name: "Anaemia", tier: "General Physician", specialist: "General Physician", symptoms: ["fatigue", "dizziness", "headache", "balance problems"] },
-  { name: "Urinary tract infection", tier: "General Physician", specialist: "General Physician", symptoms: ["burning urination", "frequent urination", "abdominal pain", "fever"] },
-  { name: "Arthritis", tier: "General Physician", specialist: "General Physician", symptoms: ["joint pain", "stiffness", "swelling"] },
-  { name: "Anxiety", tier: "General Physician", specialist: "General Physician", symptoms: ["palpitations", "chest pain", "shortness of breath", "dizziness"] },
-  { name: "Suspected stroke / TIA", tier: "Neurologist", specialist: "Neurologist", symptoms: ["weakness on one side", "slurred speech", "numbness or tingling", "confusion", "blurred vision"] },
-  { name: "Suspected seizure disorder", tier: "Neurologist", specialist: "Neurologist", symptoms: ["seizure", "loss of consciousness", "confusion", "memory problems"] },
-  { name: "Peripheral neuropathy", tier: "Neurologist", specialist: "Neurologist", symptoms: ["numbness or tingling", "weakness on one side", "tremor", "balance problems"] },
+  { name: "Common cold", tier: "General Physician", specialist: "General Physician", symptoms: ["cough", "sore throat", "runny nose", "congestion", "fatigue"], blurb: "A mild viral infection of the nose and throat." },
+  { name: "Flu / viral fever", tier: "General Physician", specialist: "General Physician", symptoms: ["fever", "chills", "fatigue", "muscle pain", "headache"], blurb: "A common viral illness causing fever, body aches, and fatigue." },
+  { name: "Migraine", tier: "General Physician", specialist: "General Physician", symptoms: ["headache", "nausea", "blurred vision", "dizziness"], blurb: "A recurring headache, often with nausea and sensitivity to light." },
+  { name: "Tension headache", tier: "General Physician", specialist: "General Physician", symptoms: ["headache", "muscle pain", "stiffness"], blurb: "A dull, tight headache usually linked to stress or muscle tension." },
+  { name: "Sinusitis", tier: "General Physician", specialist: "General Physician", symptoms: ["sinus pressure", "congestion", "headache", "sore throat"], blurb: "Inflammation of the sinuses, often following a cold." },
+  { name: "Gastroenteritis", tier: "General Physician", specialist: "General Physician", symptoms: ["abdominal pain", "diarrhoea", "nausea", "vomiting", "fever"], blurb: "Inflammation of the stomach and intestines, usually from infection." },
+  { name: "Food poisoning", tier: "General Physician", specialist: "General Physician", symptoms: ["vomiting", "diarrhoea", "abdominal pain", "nausea"], blurb: "Illness from contaminated food, usually short-lived." },
+  { name: "Acid reflux / GERD", tier: "General Physician", specialist: "General Physician", symptoms: ["heartburn", "bloating", "chest pain"], blurb: "Stomach acid backing up into the food pipe, causing heartburn." },
+  { name: "Type 2 diabetes (early signs)", tier: "General Physician", specialist: "General Physician", symptoms: ["excessive thirst", "frequent urination", "fatigue", "blurred vision", "weight loss"], blurb: "A metabolic condition where blood sugar runs persistently high." },
+  { name: "Asthma / airway irritation", tier: "General Physician", specialist: "General Physician", symptoms: ["cough", "shortness of breath", "wheezing", "chest pain"], blurb: "Narrowing of the airways that makes breathing harder." },
+  { name: "Contact dermatitis", tier: "General Physician", specialist: "General Physician", symptoms: ["rash", "itching", "swelling"], blurb: "Skin irritation from contact with an allergen or irritant." },
+  { name: "Anaemia", tier: "General Physician", specialist: "General Physician", symptoms: ["fatigue", "dizziness", "headache", "balance problems"], blurb: "Low red blood cell count, often causing fatigue and dizziness." },
+  { name: "Urinary tract infection", tier: "General Physician", specialist: "General Physician", symptoms: ["burning urination", "frequent urination", "abdominal pain", "fever"], blurb: "A bacterial infection of the urinary tract." },
+  { name: "Arthritis", tier: "General Physician", specialist: "General Physician", symptoms: ["joint pain", "stiffness", "swelling"], blurb: "Inflammation of the joints causing pain and stiffness." },
+  { name: "Anxiety", tier: "General Physician", specialist: "General Physician", symptoms: ["palpitations", "chest pain", "shortness of breath", "dizziness"], blurb: "A stress response that can cause physical symptoms like a racing heart." },
+  { name: "Suspected stroke / TIA", tier: "Neurologist", specialist: "Neurologist", symptoms: ["weakness on one side", "slurred speech", "numbness or tingling", "confusion", "blurred vision"], blurb: "Sudden disrupted blood flow to the brain — treat as an emergency." },
+  { name: "Suspected seizure disorder", tier: "Neurologist", specialist: "Neurologist", symptoms: ["seizure", "loss of consciousness", "confusion", "memory problems"], blurb: "Abnormal electrical activity in the brain causing seizures." },
+  { name: "Peripheral neuropathy", tier: "Neurologist", specialist: "Neurologist", symptoms: ["numbness or tingling", "weakness on one side", "tremor", "balance problems"], blurb: "Nerve damage causing numbness, tingling, or weakness." },
 ];
 
 const selected = new Set();
@@ -158,11 +158,15 @@ function renderResults(top) {
   list.innerHTML = "";
   top.forEach((c, i) => {
     const li = document.createElement("li");
+    li.classList.add("result-item");
     const pct = Math.round(c.confidence * 100);
     li.innerHTML = `
-      <span class="rank">0${i + 1}</span>
-      <span class="cond">${c.name}</span>
-      <span class="conf">${pct}%</span>
+      <div class="result-row">
+        <span class="rank">0${i + 1}</span>
+        <span class="cond">${c.name}</span>
+        <span class="conf">${pct}%</span>
+      </div>
+      <p class="result-blurb">${c.blurb}</p>
     `;
     list.appendChild(li);
   });
