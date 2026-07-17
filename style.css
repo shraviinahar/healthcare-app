@@ -135,6 +135,11 @@ img, svg{ display: block; max-width: 100%; }
   align-items: center;
 }
 
+.hero-grid-solo{
+  grid-template-columns: 1fr;
+  max-width: 720px;
+}
+
 @media (max-width: 900px){
   .hero-grid{ grid-template-columns: 1fr; }
 }
