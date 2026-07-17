@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
@@ -29,7 +30,13 @@
         <div class="intake-form">
           <p class="eyebrow">Step 1 of 1</p>
           <h1 class="intake-title">What's going on?</h1>
-          <p class="intake-sub">Type it in your own words, or tap what applies below. The more you add, the sharper the read.</p>
+          <p class="intake-sub">Type it in your own words, tap a body part, or tap what applies below. The more you add, the sharper the read.</p>
+
+          <div class="body-model-wrap">
+            <canvas id="bodyCanvas" class="body-canvas"></canvas>
+            <p class="body-label" id="bodyLabel">&nbsp;</p>
+            <p class="body-hint">Drag to rotate · tap a region to add its common symptoms</p>
+          </div>
 
           <label for="freeText" class="field-label">Describe how you feel</label>
           <textarea id="freeText" class="free-text" rows="4" placeholder="e.g. bad headache since yesterday, feel dizzy when I stand up, a bit nauseous too"></textarea>
@@ -46,7 +53,7 @@
 
         <!-- RIGHT: results -->
         <div class="intake-results">
-          <div class="panel-card" id="resultsCard">
+          <div class="panel-card tilt-card" id="resultsCard">
             <p class="panel-label">Your results</p>
             <div id="resultsEmpty" class="results-empty">
               <p>Nothing to show yet. Add a few symptoms on the left and hit <strong>Analyze symptoms</strong>.</p>
@@ -72,5 +79,6 @@
 
   <script src="script.js"></script>
   <script src="symptoms.js"></script>
+  <script src="body-3d.js"></script>
 </body>
 </html>

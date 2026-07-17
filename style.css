@@ -112,10 +112,23 @@ img, svg{ display: block; max-width: 100%; }
 
 /* ===== Hero ===== */
 .hero{
+  position: relative;
   padding: 72px 0 96px;
+  overflow: hidden;
+}
+
+.hero-canvas{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero-grid{
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: 56px;
@@ -525,4 +538,46 @@ img, svg{ display: block; max-width: 100%; }
   width: 100%;
   justify-content: center;
   margin-top: 6px;
+}
+
+/* ===== 3D tilt effect (shared, applied via .tilt-card + script.js) ===== */
+.tilt-card{
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  will-change: transform;
+}
+
+/* ===== Body model (symptoms page) ===== */
+.body-model-wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.body-canvas{
+  width: 100%;
+  max-width: 260px;
+  height: 320px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.body-canvas:active{ cursor: grabbing; }
+
+.body-hint{
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin: 6px 0 0;
+  text-align: center;
+}
+
+.body-label{
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--teal);
+  min-height: 1.2em;
+  margin: 2px 0 0;
 }
