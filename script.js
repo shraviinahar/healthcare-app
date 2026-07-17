@@ -11,6 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // --- Specialty tag tap-to-describe (homepage) ---
+  const tags = document.querySelectorAll("#specialtyTags .tag");
+  const descEl = document.getElementById("specialtyDesc");
+  tags.forEach((tag) => {
+    tag.addEventListener("click", () => {
+      const alreadyActive = tag.classList.contains("is-active");
+      tags.forEach((t) => t.classList.remove("is-active"));
+      if (alreadyActive) {
+        descEl.textContent = "Tap a specialty to see what they treat.";
+      } else {
+        tag.classList.add("is-active");
+        descEl.textContent = tag.dataset.desc;
+      }
+    });
+  });
+
   // --- 3D tilt-on-hover for .tilt-card elements ---
   const MAX_TILT = 8; // degrees
 

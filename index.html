@@ -25,6 +25,30 @@
 
   <main id="top">
 
+    <!-- HOW IT WORKS -->
+    <section class="how" id="how">
+      <div class="wrap">
+        <h2 class="section-title">Three steps, in order</h2>
+        <ol class="steps">
+          <li class="step tilt-card">
+            <span class="step-num">01</span>
+            <h3>Describe what you feel</h3>
+            <p>Type it naturally, or pick from a checklist — whichever's faster for you.</p>
+          </li>
+          <li class="step tilt-card">
+            <span class="step-num">02</span>
+            <h3>Get a probability read</h3>
+            <p>Not one rigid answer — the top few conditions it could be, ranked by likelihood.</p>
+          </li>
+          <li class="step tilt-card">
+            <span class="step-num">03</span>
+            <h3>Meet the right specialist</h3>
+            <p>See which kind of doctor treats it, and nearby hospitals that see these cases.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <!-- HERO -->
     <section class="hero">
       <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
@@ -35,7 +59,6 @@
           <p class="hero-sub">Describe your symptoms in plain words. Nirog reads them, estimates what's likely going on, and points you to the right kind of doctor — and a hospital nearby that treats it.</p>
           <div class="hero-actions">
             <a href="symptoms.html" class="btn btn-primary">Check your symptoms</a>
-            <a href="#how" class="btn btn-text">See how it works ↓</a>
           </div>
         </div>
 
@@ -61,33 +84,9 @@
               <li><span class="rank">02</span><span class="cond">Vestibular imbalance</span><span class="conf">21%</span></li>
               <li><span class="rank">03</span><span class="cond">Dehydration</span><span class="conf">11%</span></li>
             </ul>
-            <p class="panel-note">Suggested specialist — <strong>Neurologist</strong></p>
+            <p class="panel-note">Suggested — <strong>General Physician</strong></p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="how" id="how">
-      <div class="wrap">
-        <h2 class="section-title">Three steps, in order</h2>
-        <ol class="steps">
-          <li class="step tilt-card">
-            <span class="step-num">01</span>
-            <h3>Describe what you feel</h3>
-            <p>Type it naturally, or pick from a checklist — whichever's faster for you.</p>
-          </li>
-          <li class="step tilt-card">
-            <span class="step-num">02</span>
-            <h3>Get a probability read</h3>
-            <p>Not one rigid answer — the top few conditions it could be, ranked by likelihood.</p>
-          </li>
-          <li class="step tilt-card">
-            <span class="step-num">03</span>
-            <h3>Meet the right specialist</h3>
-            <p>See which kind of doctor treats it, and nearby hospitals that see these cases.</p>
-          </li>
-        </ol>
       </div>
     </section>
 
@@ -98,17 +97,21 @@
           <h2 class="section-title">Matched to the right domain</h2>
           <p>Every predicted condition is mapped to the specialty that treats it, so you're not left wondering which doctor to book.</p>
         </div>
-        <div class="specialty-tags">
-          <span class="tag">Cardiologist</span>
-          <span class="tag">Endocrinologist</span>
-          <span class="tag">Neurologist</span>
-          <span class="tag">Dermatologist</span>
-          <span class="tag">Gastroenterologist</span>
-          <span class="tag">Pulmonologist</span>
-          <span class="tag">General Physician</span>
+        <div>
+          <div class="specialty-tags" id="specialtyTags">
+            <button type="button" class="tag" data-desc="Treats heart and blood vessel conditions — high blood pressure, chest pain, irregular heartbeat.">Cardiologist</button>
+            <button type="button" class="tag" data-desc="Manages hormone-related conditions such as diabetes, thyroid problems, and metabolic issues.">Endocrinologist</button>
+            <button type="button" class="tag" data-desc="Handles conditions of the brain, spine, and nerves — seizures, stroke, nerve damage.">Neurologist</button>
+            <button type="button" class="tag" data-desc="Treats skin, hair, and nail conditions — rashes, acne, infections.">Dermatologist</button>
+            <button type="button" class="tag" data-desc="Focuses on the digestive system — stomach, intestines, liver, and related issues.">Gastroenterologist</button>
+            <button type="button" class="tag" data-desc="Treats lung and breathing conditions — asthma, bronchitis, shortness of breath.">Pulmonologist</button>
+            <button type="button" class="tag" data-desc="Your first stop for common illnesses and general health concerns — refers you onward if needed.">General Physician</button>
+          </div>
+          <p class="specialty-desc" id="specialtyDesc">Tap a specialty to see what they treat.</p>
         </div>
       </div>
     </section>
+
 
     <!-- TRUST / DISCLAIMER -->
     <section class="trust" id="trust">
