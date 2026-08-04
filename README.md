@@ -1,63 +1,76 @@
-# Nirog
+# Nirog backend
 
-A symptom-checker web app: describe symptoms (by text, checklist, or tapping a 3D body
-model) → get a ranked list of probable conditions → get matched to a General Physician
-or Neurologist and nearby hospitals.
+FastAPI service for symptom-based disease prediction, specialist mapping, and
+(eventually) hospital lookup.
 
-The frontend is a static HTML/CSS/JS site with a 3D interactive layer (Three.js). The
-`backend/` folder has a working FastAPI service with the same prediction logic, ready to
-swap in a real trained model later.
+Currently uses a small rule-based scorer as a placeholder — swap it for your
+trained Extra Trees/XGBoost model once ready (see the comment above
+`score_conditions()` in `main.py`).
 
-## Structure
-
-```
-nirog-web/
-├── index.html      # landing page markup
-├── symptoms.html   # symptom input + results page
-├── style.css       # design tokens + layout (shared by both pages)
-├── script.js       # hero chip demo + shared 3D tilt-on-hover effect for cards
-├── symptoms.js     # symptom checklist, mock scoring, results rendering
-├── hero-3d.js      # floating 3D shapes background (homepage hero)
-├── body-3d.js      # interactive 3D body model (symptoms page)
-└── backend/
-    ├── main.py           # FastAPI app: /health, /symptoms, /predict
-    ├── requirements.txt
-    └── README.md         # backend-specific setup/run/deploy instructions
-```
-
-## Running the frontend locally
-
-Just open `index.html` in a browser, or serve it:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then visit `http://localhost:8000`. The 3D elements load Three.js from a CDN, so an
-internet connection is needed for those to render.
-
-## Running the backend locally
-
-See `backend/README.md` for full instructions — in short:
+## Setup
 
 ```bash
 cd backend
+python -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+## Run locally
+
+```bash
 uvicorn main:app --reload
 ```
 
-## Deploying the frontend with GitHub Pages
+- API: http://127.0.0.1:8000
+- Interactive docs (Swagger UI): http://127.0.0.1:8000/docs
 
-1. Push this folder to a GitHub repo.
-2. Go to **Settings → Pages**.
-3. Set source to your default branch, root folder.
-4. Your site will be live at `https://<username>.github.io/<repo-name>/`.
+## Endpoints
+
+| Method | Path           | Description                                      |
+|--------|----------------|-----------------------------------------------------|
+| GET    | `/health`      | Health check                                       |
+| GET    | `/symptoms`    | Canonical list of symptoms the model understands   |
+| POST   | `/predict`     | Send `{ "symptoms": [...], "free_text": "..." }`, get back top-3 predictions with specialist + confidence + a one-line description |
+| POST   | `/progression` | Send `{ "daily_symptom_counts": [1,2,3,4,6,7] }` (oldest day first), get back a Hidden Markov Model's inferred Healthy/Moderate/Sick/Needs specialist/Diseases state per day and an overall trend |
+
+Example requests:
+
+```bash
+curl -X POST http://127.0.0.1:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"symptoms": ["headache", "dizziness", "nausea"]}'
+
+curl -X POST http://127.0.0.1:8000/progression \
+  -H "Content-Type: application/json" \
+  -d '{"daily_symptom_counts": [1, 2, 3, 4, 6, 7]}'
+```
+
+### About `/progression`
+
+This is a Hidden Markov Model (see `progression.py`), separate from the
+disease-prediction logic. `/predict` looks at one snapshot of symptoms;
+`/progression` looks at a *sequence* of days and infers whether the
+person's underlying severity (a hidden state — Healthy, Moderate, Sick, Needs specialist, or Diseases) is
+trending up or down, based on how many symptoms they logged each day.
+The transition/emission probabilities are currently hand-set, sensible
+defaults rather than fit from real patient data — swap in `model.fit()`
+on real longitudinal data once you have it.
+
+## Connecting the frontend
+
+Update `symptoms.js` on the frontend to `fetch("http://127.0.0.1:8000/predict", ...)`
+instead of scoring locally, once this is running. CORS is already open (`allow_origins=["*"]`)
+for local development — tighten this before deploying publicly.
+
+## Deploying
+
+Free options that work well for a student project: **Render** or **Railway**.
+Both can deploy directly from this `backend/` folder in your GitHub repo —
+point them at `uvicorn main:app --host 0.0.0.0 --port $PORT` as the start command.
 
 ## Next steps
 
-- Connect `symptoms.js` to the FastAPI backend (`/predict`) instead of scoring locally.
-- Replace the backend's rule-based scorer with a trained tree-based model.
-- Add real login (Firebase Auth / Supabase).
-- Add live hospital lookup via Google Places API.
-- Add a tap-to-select fallback for the 3D body model on touch devices (currently
-  optimized for hover + drag on desktop).
+- Replace `score_conditions()` with real model inference (`joblib.load()` your `.pkl`).
+- Add a `/hospitals` endpoint that calls the Google Places API.
+- Add authentication (if this API starts storing per-user history).

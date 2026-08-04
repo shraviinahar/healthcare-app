@@ -15,10 +15,12 @@ Run locally:
 Then visit http://127.0.0.1:8000/docs for interactive API docs.
 """
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List
+
+from progression import infer_progression
 
 app = FastAPI(
     title="Nirog API",
@@ -218,3 +220,37 @@ def predict(payload: PredictRequest):
         predictions=predictions,
         matched_symptoms=sorted(found),
     )
+
+
+# ---------------------------------------------------------------------------
+# Symptom progression tracking (Hidden Markov Model)
+#
+# /predict answers "what might this be, from one snapshot of symptoms."
+# /progression answers "is this trending better or worse over several days" —
+# an inherently sequential question, which is what the HMM in progression.py
+# is built for. See that file for the model design notes.
+# ---------------------------------------------------------------------------
+
+class ProgressionRequest(BaseModel):
+    daily_symptom_counts: List[int] = Field(
+        ...,
+        description="Number of symptoms reported each day, oldest first.",
+        examples=[[1, 2, 3, 4, 6, 7]],
+    )
+
+
+class ProgressionResponse(BaseModel):
+    daily_states: List[str]   # e.g. ["Healthy", "Moderate", "Sick", "Needs specialist", "Diseases"]
+    trend: str                # "Improving" | "Stable" | "Worsening" | not-enough-data message
+    log_likelihood: float
+
+
+@app.post("/progression", response_model=ProgressionResponse)
+def progression(payload: ProgressionRequest):
+    if not payload.daily_symptom_counts:
+        raise HTTPException(status_code=400, detail="Provide at least one day of data.")
+    if any(c < 0 for c in payload.daily_symptom_counts):
+        raise HTTPException(status_code=400, detail="Symptom counts can't be negative.")
+
+    result = infer_progression(payload.daily_symptom_counts)
+    return ProgressionResponse(**result)
