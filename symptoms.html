@@ -16,9 +16,10 @@
       <a href="index.html" class="logo">Nirog<span class="logo-dot">.</span></a>
       <nav class="main-nav" aria-label="Primary">
         <a href="index.html#how">How it works</a>
+        <a href="progression.html">Track progress</a>
         <a href="index.html#trust">Read this first</a>
       </nav>
-      <a href="#" class="btn btn-ghost nav-cta">Log in</a>
+      <span id="navAuthSlot"><a href="login.html" class="btn btn-ghost nav-cta">Log in</a></span>
     </div>
   </header>
 
@@ -62,7 +63,6 @@
               <p class="results-caveat">Confidence reflects symptom overlap with common patterns, not a clinical accuracy score.</p>
               <ul class="result-list" id="resultList"></ul>
               <p class="panel-note" id="specialistNote"></p>
-              <a href="#" class="btn btn-ghost results-cta">Find nearby hospitals →</a>
             </div>
           </div>
         </div>
@@ -81,5 +81,6 @@
   <script src="script.js"></script>
   <script src="symptoms.js"></script>
   <script src="body-3d.js"></script>
+  <script type="module" src="auth.js"></script>
 </body>
 </html>

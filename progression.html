@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Track your symptoms — Nirog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a href="index.html" class="logo">Nirog<span class="logo-dot">.</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="symptoms.html">Check symptoms</a>
+        <a href="index.html#how">How it works</a>
+      </nav>
+      <span id="navAuthSlot"></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="intake">
+      <div class="wrap intake-grid">
+
+        <!-- LEFT: daily log -->
+        <div class="intake-form">
+          <p class="eyebrow">Day-by-day tracking</p>
+          <h1 class="intake-title">How's it trending?</h1>
+          <p class="intake-sub">Log how many symptoms you're dealing with each day. Once you've got a few days logged, a Hidden Markov Model looks at the pattern and estimates whether things are improving, holding steady, or getting worse.</p>
+
+          <label for="dayCount" class="field-label">Today's symptom count</label>
+          <div class="log-input-row">
+            <input type="number" id="dayCount" class="free-text log-count-input" min="0" max="20" placeholder="e.g. 3" />
+            <button type="button" class="btn btn-primary" id="addDayBtn">Add entry</button>
+          </div>
+
+          <p class="field-label">Logged days (oldest first)</p>
+          <ul class="day-log" id="dayLog">
+            <li class="day-log-empty">No days logged yet.</li>
+          </ul>
+
+          <div class="intake-actions">
+            <button type="button" class="btn btn-primary" id="analyzeTrendBtn">Analyze trend</button>
+            <button type="button" class="btn btn-text" id="clearLogBtn">Clear history</button>
+          </div>
+          <p class="intake-disclaimer">This estimates a pattern from what you log — it isn't a diagnosis, and it can't replace checking in with a doctor if things feel wrong.</p>
+        </div>
+
+        <!-- RIGHT: results -->
+        <div class="intake-results">
+          <div class="panel-card tilt-card" id="trendCard">
+            <p class="panel-label">Estimated trend</p>
+            <div id="trendEmpty" class="results-empty">
+              <p>Log a few days, then hit <strong>Analyze trend</strong> to see where things are heading.</p>
+            </div>
+            <div id="trendFilled" class="results-filled" hidden>
+              <p class="results-caveat">Each day below is the model's best guess at your underlying state — not a confirmed diagnosis.</p>
+              <div class="state-timeline" id="stateTimeline"></div>
+              <p class="panel-note" id="trendVerdict"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>Nirog</span>
+      <span class="footer-fine">A student project — not a certified medical device.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="progression.js"></script>
+  <script src="progression-ui.js"></script>
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

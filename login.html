@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Log in — Nirog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a href="index.html" class="logo">Nirog<span class="logo-dot">.</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <a href="index.html#how">How it works</a>
+        <a href="index.html#trust">Read this first</a>
+      </nav>
+      <span id="navAuthSlot"></span>
+    </div>
+  </header>
+
+  <main>
+    <section class="auth-section">
+      <div class="wrap auth-wrap">
+        <div class="panel-card auth-card">
+          <div class="auth-tabs" role="tablist">
+            <button type="button" class="auth-tab is-active" id="tabLogin" role="tab" aria-selected="true">Log in</button>
+            <button type="button" class="auth-tab" id="tabSignup" role="tab" aria-selected="false">Sign up</button>
+          </div>
+
+          <form id="authForm" novalidate>
+            <label for="email" class="field-label">Email</label>
+            <input type="email" id="email" class="free-text auth-input" placeholder="you@example.com" required autocomplete="email" />
+
+            <label for="password" class="field-label">Password</label>
+            <input type="password" id="password" class="free-text auth-input" placeholder="At least 6 characters" required autocomplete="current-password" minlength="6" />
+
+            <p class="auth-error" id="authError" hidden></p>
+
+            <button type="submit" class="btn btn-primary auth-submit" id="authSubmit">Log in</button>
+          </form>
+
+          <p class="auth-switch" id="authSwitchText">
+            Don't have an account? <button type="button" class="auth-link" id="switchToSignup">Sign up</button>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>Nirog</span>
+      <span class="footer-fine">A student project — not a certified medical device.</span>
+    </div>
+  </footer>
+
+  <script type="module" src="login.js"></script>
+  <script type="module" src="auth.js"></script>
+</body>
+</html>
