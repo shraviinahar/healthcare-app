@@ -128,15 +128,27 @@ function extractFromText(text) {
 }
 
 function scoreConditions() {
-  return CONDITIONS
+  const ranked = CONDITIONS
     .map((c) => {
       const overlap = c.symptoms.filter((s) => selected.has(s)).length;
-      const confidence = overlap / c.symptoms.length;
-      return { ...c, overlap, confidence };
+      const rawScore = overlap / c.symptoms.length;
+      return { ...c, overlap, rawScore };
     })
     .filter((c) => c.overlap > 0)
-    .sort((a, b) => b.confidence - a.confidence || b.overlap - a.overlap)
+    .sort((a, b) => b.rawScore - a.rawScore || b.overlap - a.overlap)
     .slice(0, 3);
+
+  // Each condition's rawScore is scored independently against its own
+  // symptom list, so several can legitimately hit 100% at once — that
+  // reads as "three separate 100% matches" rather than a comparison
+  // between them. Renormalizing across just the shown top-3 turns it
+  // into a relative split that sums to 100%, which is what "confidence"
+  // should look like when several options are shown side by side.
+  const totalRaw = ranked.reduce((sum, c) => sum + c.rawScore, 0);
+  return ranked.map((c) => ({
+    ...c,
+    confidence: totalRaw > 0 ? c.rawScore / totalRaw : 0,
+  }));
 }
 
 function renderResults(top) {
