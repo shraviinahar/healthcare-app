@@ -1,11 +1,13 @@
 // body-3d.js
-// A simple low-poly 3D figure built from primitive geometries. Drag to
-// rotate; click a region to toggle its commonly-associated symptoms in
-// the checklist (via window.NirogSymptoms, exposed by symptoms.js).
+// A simple low-poly 3D figure built from primitive geometries, stacked
+// so each part's edges touch the next (head -> throat -> chest ->
+// abdomen -> legs), with arms attached at the shoulders. Drag to
+// rotate; click a region to toggle its one associated symptom in the
+// checklist (via window.NirogSymptoms, exposed by symptoms.js) — e.g.
+// the head toggles "headache", the abdomen toggles "abdominal pain".
 //
-// This is a UX shortcut for common symptom clusters, not a diagnostic
-// tool in itself — it just pre-fills related chips faster than tapping
-// each one individually.
+// This is a UX shortcut for quickly adding a common symptom, not a
+// diagnostic tool in itself.
 
 (function () {
   const canvas = document.getElementById("bodyCanvas");
@@ -32,7 +34,10 @@
   const group = new THREE.Group();
   scene.add(group);
 
-  // Each region: geometry + position + the symptoms it represents.
+  // Each region: geometry + position + the single, simple symptom it
+  // represents. Kept to one symptom per click (rather than a cluster)
+  // so tapping a region reads as "this is roughly a headache/stomach
+  // ache/sore throat" rather than dumping several chips on at once.
   const regions = [];
 
   function addPart(name, geometry, position, symptomList) {
@@ -49,36 +54,46 @@
     return mesh;
   }
 
+  // Figure built as a stack of touching segments (each part's top edge
+  // meets the previous part's bottom edge) so it reads as one connected
+  // body rather than floating disconnected pieces.
+  //
+  //   Head   top 3.00, bottom 2.10   (radius 0.45, center y 2.55)
+  //   Throat top 2.10, bottom 1.80   (height 0.30, center y 1.95)
+  //   Chest  top 1.80, bottom 0.80   (height 1.00, center y 1.30)
+  //   Abdomen top 0.80, bottom 0.10  (height 0.70, center y 0.45)
+  //   Legs   top 0.10, bottom -1.50  (height 1.60, center y -0.70)
+
   // Head
-  addPart("Head", new THREE.SphereGeometry(0.55, 20, 20), [0, 2.35, 0],
-    ["headache", "dizziness", "blurred vision", "confusion"]);
+  addPart("Head", new THREE.SphereGeometry(0.45, 20, 20), [0, 2.55, 0],
+    ["headache"]);
 
   // Neck / throat
-  addPart("Throat", new THREE.CylinderGeometry(0.22, 0.24, 0.35, 16), [0, 1.85, 0],
-    ["sore throat", "congestion", "sinus pressure"]);
+  addPart("Throat", new THREE.CylinderGeometry(0.20, 0.22, 0.30, 16), [0, 1.95, 0],
+    ["sore throat"]);
 
   // Chest
-  addPart("Chest", new THREE.CylinderGeometry(0.62, 0.55, 1.1, 16), [0, 1.05, 0],
-    ["chest pain", "shortness of breath", "palpitations", "cough"]);
+  addPart("Chest", new THREE.CylinderGeometry(0.55, 0.48, 1.00, 16), [0, 1.30, 0],
+    ["chest pain"]);
 
   // Abdomen
-  addPart("Abdomen", new THREE.CylinderGeometry(0.5, 0.42, 0.7, 16), [0, 0.25, 0],
-    ["abdominal pain", "nausea", "vomiting", "diarrhoea", "bloating"]);
+  addPart("Abdomen", new THREE.CylinderGeometry(0.48, 0.40, 0.70, 16), [0, 0.45, 0],
+    ["abdominal pain"]);
 
-  // Arms
-  addPart("Left arm", new THREE.CylinderGeometry(0.14, 0.12, 1.5, 12), [-0.82, 0.95, 0],
-    ["numbness or tingling", "weakness on one side", "tremor"]).rotation.z = 0.25;
-  addPart("Right arm", new THREE.CylinderGeometry(0.14, 0.12, 1.5, 12), [0.82, 0.95, 0],
-    ["numbness or tingling", "weakness on one side", "tremor"]).rotation.z = -0.25;
+  // Arms — attached at shoulder height (chest top), hanging alongside the torso
+  addPart("Left arm", new THREE.CylinderGeometry(0.12, 0.10, 1.55, 12), [-0.66, 0.85, 0],
+    ["numbness or tingling"]).rotation.z = 0.12;
+  addPart("Right arm", new THREE.CylinderGeometry(0.12, 0.10, 1.55, 12), [0.66, 0.85, 0],
+    ["numbness or tingling"]).rotation.z = -0.12;
 
-  // Legs
-  addPart("Left leg", new THREE.CylinderGeometry(0.18, 0.15, 1.7, 12), [-0.3, -1.35, 0],
-    ["joint pain", "muscle pain", "swelling", "balance problems"]);
-  addPart("Right leg", new THREE.CylinderGeometry(0.18, 0.15, 1.7, 12), [0.3, -1.35, 0],
-    ["joint pain", "muscle pain", "swelling", "balance problems"]);
+  // Legs — top edge meets the abdomen's bottom edge exactly
+  addPart("Left leg", new THREE.CylinderGeometry(0.18, 0.15, 1.60, 12), [-0.26, -0.70, 0],
+    ["joint pain"]);
+  addPart("Right leg", new THREE.CylinderGeometry(0.18, 0.15, 1.60, 12), [0.26, -0.70, 0],
+    ["joint pain"]);
 
-  group.scale.setScalar(1.05);
-  group.position.y = -0.1;
+  // Centers the figure's bounding box (top 3.00, bottom -1.50) at y = 0.
+  group.position.y = -0.75;
 
   // --- Drag to rotate ---
   let isDragging = false;
