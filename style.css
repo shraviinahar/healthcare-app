@@ -323,22 +323,35 @@ img, svg{ display: block; max-width: 100%; }
   margin: 0 0 44px;
 }
 
-.steps{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+.steps-carousel{
+  position: relative;
+  max-width: 440px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
-@media (max-width: 800px){
-  .steps{ grid-template-columns: 1fr; gap: 32px; }
+.steps-track{
+  display: flex;
+  will-change: transform;
+  cursor: grab;
+  touch-action: pan-y;
 }
 
-.step{
+.steps-track:active{ cursor: grabbing; }
+
+.step-slide{
+  flex: 0 0 100%;
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 8px 8px 12px;
+  user-select: none;
+}
+
+.step-slide::before{
+  content: "";
+  display: block;
   border-top: 2px solid var(--teal);
-  padding-top: 18px;
+  margin-bottom: 18px;
 }
 
 .step-num{
@@ -349,17 +362,67 @@ img, svg{ display: block; max-width: 100%; }
   margin-bottom: 12px;
 }
 
-.step h3{
+.step-slide h3{
   font-family: var(--display);
   font-weight: 700;
   font-size: 1.2rem;
   margin: 0 0 10px;
 }
 
-.step p{
+.step-slide p{
   color: var(--ink-soft);
   margin: 0;
   font-size: 0.96rem;
+}
+
+.steps-arrow{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  color: var(--ink);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-arrow:hover{ border-color: var(--teal); color: var(--teal); }
+
+.steps-arrow-prev{ left: -6px; }
+.steps-arrow-next{ right: -6px; }
+
+@media (max-width: 560px){
+  .steps-arrow{ display: none; }
+}
+
+.steps-dots{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.steps-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--line);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.steps-dot.is-active{
+  background: var(--teal);
+  transform: scale(1.3);
 }
 
 /* ===== Specialists ===== */
