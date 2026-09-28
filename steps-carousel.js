@@ -14,6 +14,7 @@
 (function () {
   const carousel = document.getElementById("stepsCarousel");
   const track = document.getElementById("stepsTrack");
+  const viewport = track.parentElement; // .steps-viewport — the actual visible sliding area
   const dotsEl = document.getElementById("stepsDots");
   const prevBtn = document.getElementById("stepsPrev");
   const nextBtn = document.getElementById("stepsNext");
@@ -43,7 +44,7 @@
   let autoplayTimer = null;
 
   function slideWidth() {
-    return carousel.getBoundingClientRect().width;
+    return viewport.getBoundingClientRect().width;
   }
 
   function goTo(newIndex, animate = true) {

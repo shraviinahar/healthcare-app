@@ -15,6 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const tags = document.querySelectorAll("#specialtyTags .tag");
   const descEl = document.getElementById("specialtyDesc");
   tags.forEach((tag) => {
+    // Spotlight glow follows the cursor across the tag
+    tag.addEventListener("mousemove", (e) => {
+      const rect = tag.getBoundingClientRect();
+      tag.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+      tag.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    });
+
     tag.addEventListener("click", () => {
       const alreadyActive = tag.classList.contains("is-active");
       tags.forEach((t) => t.classList.remove("is-active"));

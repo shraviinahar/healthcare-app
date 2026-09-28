@@ -32,25 +32,28 @@
         <h2 class="section-title">Three steps, in order</h2>
 
         <div class="steps-carousel" id="stepsCarousel">
-          <div class="steps-track" id="stepsTrack">
-            <div class="step-slide tilt-card">
-              <span class="step-num">01</span>
-              <h3>Describe what you feel</h3>
-              <p>Type it naturally, or pick from a checklist — whichever's faster for you.</p>
-            </div>
-            <div class="step-slide tilt-card">
-              <span class="step-num">02</span>
-              <h3>Get a probability read</h3>
-              <p>Not one rigid answer — the top few conditions it could be, ranked by likelihood.</p>
-            </div>
-            <div class="step-slide tilt-card">
-              <span class="step-num">03</span>
-              <h3>Meet the right specialist</h3>
-              <p>See which kind of doctor treats it, and nearby hospitals that see these cases.</p>
+          <button type="button" class="steps-arrow steps-arrow-prev" id="stepsPrev" aria-label="Previous step">‹</button>
+
+          <div class="steps-viewport">
+            <div class="steps-track" id="stepsTrack">
+              <div class="step-slide tilt-card">
+                <span class="step-num">01</span>
+                <h3>Describe what you feel</h3>
+                <p>Type it naturally, or pick from a checklist — whichever's faster for you.</p>
+              </div>
+              <div class="step-slide tilt-card">
+                <span class="step-num">02</span>
+                <h3>Get a probability read</h3>
+                <p>Not one rigid answer — the top few conditions it could be, ranked by likelihood.</p>
+              </div>
+              <div class="step-slide tilt-card">
+                <span class="step-num">03</span>
+                <h3>Meet the right specialist</h3>
+                <p>See which kind of doctor treats it, and nearby hospitals that see these cases.</p>
+              </div>
             </div>
           </div>
 
-          <button type="button" class="steps-arrow steps-arrow-prev" id="stepsPrev" aria-label="Previous step">‹</button>
           <button type="button" class="steps-arrow steps-arrow-next" id="stepsNext" aria-label="Next step">›</button>
 
           <div class="steps-dots" id="stepsDots"></div>
